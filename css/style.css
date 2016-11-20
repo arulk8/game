@@ -1,3 +1,9 @@
 body {
     text-align: center;
 }
+#gems {
+	color:red;
+	font-size: 30px;
+	margin-bottom: 0px;
+	
+}

@@ -1,4 +1,36 @@
 // Enemies our player must avoid
+var count=0;
+var Gem = function()
+{
+ this.x=300;
+ this.y =300;
+ this.sprite ='images/Gem-Green_60.png';
+};
+ 
+ var gem =new Gem();
+
+Gem.prototype.gemrandomizer= function()
+{
+    
+
+     if (player.x < this.x + 30 && 
+        player.x + 40 > this.x &&
+        player.y < this.y + 25 &&
+        50 + player.y > this.y) {
+         count = count+1;
+         this.x=Math.random()* (400 - 50) + 50;
+         this.y=Math.random() * (400 - 40) + 50;
+         window.onload =function()
+         {
+        document.getElementById("counts").innerHTML= count;
+    };
+     }
+        
+        
+       
+    
+    
+};
 
 var Enemy = function(x,y,speed) {
     // Variables applied to each of our instances go here,
@@ -11,8 +43,13 @@ var Enemy = function(x,y,speed) {
     this.startx=x;
     this.starty=y;
     this.speed=speed;
+    
 };
 
+Gem.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+   
+}
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
@@ -22,11 +59,22 @@ Enemy.prototype.update = function(dt) {
    this.x=this.x+(this.speed*dt);
 
     
+
     if(this.x > 500)
     {
         this.updatepos();
     }
 
+    if (player.x < this.x + 30 && 
+        player.x + 30 > this.x &&
+        player.y < this.y + 50 &&
+        50 + player.y > this.y) {
+       player.reset();
+       window.alert("Game \ over!");
+       count=0;
+
+    }
+    
 };
 
 // Draw the enemy on the screen, required method for game
@@ -37,7 +85,8 @@ Enemy.prototype.render = function() {
 Enemy.prototype.updatepos=function()
 {
      this.x=this.startx;
-    this.y=this.starty;
+     this.y=this.starty;
+
 };
 // Now write your own player class
 // This class requires an update(), render() and
@@ -47,13 +96,25 @@ var Player =function(x,y) {
     this.y=y;
     this.sprite = 'images/char-boy.png';
 
+
 };
 Player.prototype.update = function(dt) {
+if(this.y == -10)
+{
+    player.reset();
+}
 
     
 };
+Player.prototype.reset =function()
+{
+    player.x=205;
+    player.y=380;
+
+};
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+     
 
 };
 Player.prototype.handleInput=function(e)
@@ -65,12 +126,12 @@ if(e =='left' && this.x >10) {
     else if(e =='right' && this.x <400) {
         this.x+= 50; 
     }
-    else if(e =='up'&& this.y >10) {
+    else if(e =='up'&& this.y >0) {
 
-        this.y-= 35; 
+        this.y-= 15; 
     }
     else if(e =='down'&& this.y< 400) {
-        this.y+= 50; 
+        this.y+= 15; 
     }
 };
 // Now instantiate your objects.
@@ -79,18 +140,15 @@ if(e =='left' && this.x >10) {
 var enemy1 = new Enemy(-100,230,180);
 var enemy2 = new Enemy(-300,140,180);
 var enemy3 = new Enemy(-200,60,180);
-var enemy4 = new Enemy(-400,230,180);
-var enemy5 = new Enemy(-600,140,180);
-var enemy6 = new Enemy(-500,60,180);
+var enemy4 = new Enemy(-400,230,220);
+var enemy5 = new Enemy(-600,140,220);
+var enemy6 = new Enemy(-500,60,220);
 
 var allEnemies = [enemy1,enemy2,enemy3,enemy4,enemy5,enemy6];
 
 var player= new Player(205,380);
 
-var checkCollisions =function()
-{
 
-};
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

@@ -5,12 +5,13 @@ var Gem = function () {
         this.y = 300;
         this.sprite = 'images/Gem-Green_60.png';
 };
+//creating gem 
 var gem = new Gem();
 Gem.prototype.gemrandomizer = function () {
-        if (player.x < this.x + 30 && player.x + 40 > this.x && player.y < this.y + 25 && 30 + player.y > this.y) {
+        if (player.x < this.x + 30 && player.x + 45 > this.x && player.y < this.y + 35 && 40 + player.y > this.y) {
                 count = count + 1;
                 this.x = Math.random() * (400 - 50) + 50;
-                this.y = Math.random() * (400 - 40) + 50;
+                this.y = Math.random() * (360 - 40) + 40;
                 var showgem = function () {
                         document.getElementById("counts").innerHTML = count;
                 };
@@ -40,7 +41,7 @@ Enemy.prototype.update = function (dt) {
         // all computers.
         this.x = this.x + (this.speed * dt);
         if (this.x > 500) {
-                // this.updatepos();
+                this.updatepos();
         }
         //collision detection
         if (player.x < this.x + 30 && player.x + 30 > this.x && player.y < this.y + 50 && 50 + player.y > this.y) {

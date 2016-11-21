@@ -5,8 +5,10 @@
 *  Avoid the bugs if you came in contact with bugs then GAME OVER!.
 * Collect the gems as you move up.
 * No need to install any software for playing this game google chrome is enough.
-* use Arrow keys to move through the game.
+* use Arrow keys to move through the game. 
+
 ## How to play
+
 * use git clone https://github.com/arulk8/game.git to download the repo.
 *  open index.html in google Chrome and enjoy the game. 
 
